@@ -1,0 +1,377 @@
+:root {
+    /*on a choisi notre palette de couleurs sur le site ColorHunt*/
+    /*on utilise des variables CSS pr que la maintenance des couleurs soit plus facile*/
+    --arrierePlan: #FDE7B3;
+    --couleurPrincipale: #63A361;
+    --couleurAccentuation: #FFC50F;
+    --texte: #5B532C;
+    --blanc: #ffffff;
+}
+
+body {
+    /*choix de la police*/
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #fffdf5; 
+    color: var(--texte);
+    /*on utilise flexbox pour la mise en page globale de notre page*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /*pour que le footer reste en bas*/
+}
+
+main {
+    /*ici le main prends toute la place dispo*/
+    flex: 1;
+    width: 100%;
+}
+
+header {
+    background-color: var(--couleurPrincipale);
+    color: var(--blanc);
+    padding: 2rem 0;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(99, 163, 97, 0.3); /*ombre verte pour donner du relief*/
+}
+
+.bandeau h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.nomEnseigne { /*ajout d'une animation quand le nom de l'enseigne arrive*/
+    display: inline-block;
+    animation: slideIn 2s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; } /*ça part de la gauche*/
+    to { transform: translateX(0); opacity: 1; } /*pour arriver à sa place*/
+}
+
+.lienDeconnexion {
+    color: #ffffff;           
+    text-decoration: underline; /*on souligne pour montrer que c'est cliquable*/ 
+    margin-left: 10px;         
+    font-size: 0.8em;
+}
+
+.sectionRecherche {
+    background: var(--blanc);
+    padding: 25px;
+    margin: -35px auto 40px;
+    width: 85%;
+    max-width: 950px;
+    border-radius: 15px; /*on arrondi les angles*/
+    box-shadow: 0 10px 25px rgba(91, 83, 44, 0.15); /*ça donne un effet de carte qui flotte*/
+    position: relative;
+    border: 2px solid var(--arrierePlan);
+}
+
+.sectionPublication {
+    background-color: #fffdf0;
+    margin-top: 60px;
+    border-color: var(--couleurPrincipale);
+}
+
+.sectionPublication h3 {
+    color: var(--texte);
+    text-align: center;
+}
+
+.conteneurConnexion {
+    max-width: 400px;
+    margin-top: 50px;
+}
+
+/*mise en page du formulaire de recherche avec Flexbox*/
+.barreRecherche {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /*c'est l'espace entre les éléments de la barre de recherche*/
+    flex-wrap: wrap; /*pour que les éléments se mettent à la ligne sur petit écran*/
+}
+
+/*style des groupes d'input*/
+.inputGroup {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    background: #fcfcfc;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+/*couleur de l'icône dans l'input*/
+.inputGroup i {
+    color: var(--couleurPrincipale);
+    font-size: 1.2rem;
+}
+/*comme ça l'input se fond dans notre design */
+.inputGroup input {
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+    width: 100%;
+    outline: none; /*ça l'enlève le contour bleu par défaut au clic*/
+
+    color: var(--texte);
+    font-weight: 500;
+}
+
+/*style des boutons dans la barre de recherche*/
+.barreRecherche button {
+    background-color: var(--couleurAccentuation);
+    color: var(--texte);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 8px;
+    cursor: pointer; /*notre curseur devient une main*/
+    font-weight: 800;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/*j'ai fait comme une pseudo-classe de barre de recherche
+pour qu'il y est une effet de survol/hover au passage du curseur*/
+.barreRecherche button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 197, 15, 0.4); /*on a une ombre jaune autour du bouton*/
+}
+
+.destinations {
+    width: 85%;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.destinations h2 {
+    color: var(--couleurPrincipale);
+    margin-bottom: 30px;
+}
+
+.destinationsGrid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.destinationCarre {
+    position: relative; /*pour que le texte se positionne par dessus l'image*/
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.destinationCarre:hover {
+    transform: translateY(-5px); /*la carte se soulève*/
+}
+
+.dest-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /*l'image couvre tout le carré sans se déformer*/
+    transition: transform 0.5s ease;
+}
+
+.destinationCarre:hover .dest-img { /*zoom sur l'image*/
+    transform: scale(1.1);
+}
+
+.infoDestination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /*espace entre le titre et le prix*/
+    align-items: flex-end;
+}
+
+.infoDestination h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /*ça donne une ombre sous le texte*/
+}
+
+.infoDestination .price {
+    margin: 0;
+    font-weight: bold;
+    color: var(--couleurAccentuation); /*on a le prix en jaune*/
+    font-size: 1.1rem;
+}
+
+.boutonVoir {
+    background-color: var(--couleurPrincipale);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+    transition: background 0.3s;
+}
+
+.boutonVoir:hover {
+    background-color: var(--couleurAccentuation);
+    color: var(--texte);
+}
+
+.commentaires {
+    width: 85%;
+    max-width: 900px;
+    margin: 0 auto 50px;
+}
+
+.commentaires h2 {
+    text-align: center;
+    color: var(--couleurPrincipale);
+    margin-bottom: 30px;
+}
+
+.carreCommentaires {
+    display: flex;
+    flex-direction: column; /*donc les commentaires sont les uns sous les autres*/
+    gap: 20px;
+}
+
+.carreComm {
+    background: var(--blanc);
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(91, 83, 44, 0.08);
+    border-left: 5px solid var(--couleurAccentuation); /* bordure jaune*/
+    border-top: none;
+    
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    text-align: left;
+    transition: transform 0.2s;
+}
+
+.carreComm:hover { /*on a une mouvement vers la droite au survol*/
+    transform: translateX(10px);
+}
+
+.avatar-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /*comme ça on a une image ronde*/
+    object-fit: cover;
+    margin-bottom: 0; 
+    margin-right: 25px; 
+    border: 3px solid var(--arrierePlan); /*bordure beige autour des photos*/
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.contenuComm p {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--texte);
+}
+
+.contenuComm small {
+    font-weight: bold;
+    color: #888;
+}
+
+.etoiles {
+    color: var(--couleurAccentuation); /*pour avoir les étoiles en jaune*/
+    margin-right: 5px;
+}
+
+article h2 {
+    text-align: center;
+    color: var(--texte);
+}
+
+.tableau {
+    width: 85%;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    border-collapse: collapse; /*pour que les bordures des cellules soient fusionnées*/
+    background: var(--blanc);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.tableau th, .tableau td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.tableau th {
+    background-color: var(--texte);
+    color: var(--arrierePlan);
+}
+
+.tableau tr {
+    border-bottom: 1px solid #eee;
+}
+
+.tableau tr:hover { /*la ligne change de couleur au passage de la souris*/
+    background-color: #fffdf0;
+}
+
+.boutonReserver {
+    background-color: var(--couleurPrincipale);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boutonReserver:hover {
+    background-color: #528a50; /*on a un vert un peu plus foncé au survol*/
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--texte);
+    color: var(--arrierePlan);
+    font-weight: 300;
+}
+/* Messages de confirmation / d'erreur */
+.message {
+    width: 85%;
+    max-width: 950px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.message-succes {
+    background-color: #e8f5e3;
+    color: #2f6b2d;
+    border: 1px solid var(--couleurPrincipale);
+}
+
+.message-erreur {
+    background-color: #fdecea;
+    color: #9b2c1f;
+    border: 1px solid #e8a39a;
+}
