@@ -1,0 +1,5 @@
+# Identifiants de connexion à la base (ne jamais publier)
+config.php
+
+# macOS
+.DS_Store
